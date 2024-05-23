@@ -1,87 +1,76 @@
 <?php
-include ('config.php');
+include('config.php');
 session_start();
 
 if (!isset($_SESSION['librarian_id'])) {
-    header("Location: login_librarian.php");
+    header("Location: login_pmpt.php");
     exit;
 }
 
-$errors = [];
-$success = "";
+// Add book
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_book'])) {
+    $title = isset($_POST['title']) ? trim($_POST['title']) : null;
+    $author = isset($_POST['author']) ? trim($_POST['author']) : null;
+    $category_id = isset($_POST['category_id']) ? intval($_POST['category_id']) : null;
+    $description = isset($_POST['description']) ? trim($_POST['description']) : null;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $action = $_POST['action'];
-    $title = trim($_POST['title']);
-    $author = trim($_POST['author']);
-    $category_id = intval($_POST['category_id']);
-    $description = trim($_POST['description']);
-
-    if ($action == 'add') {
-        if (empty($title) || empty($author) || empty($category_id) || empty($description)) {
-            $errors[] = "All fields are required.";
-        } else {
-            $sql = "INSERT INTO books (title, author, category_id, description) VALUES (?, ?, ?, ?)";
-            if ($stmt = $conn->prepare($sql)) {
-                $stmt->bind_param('ssis', $title, $author, $category_id, $description);
-
-                if ($stmt->execute()) {
-                    $success = "Book added successfully.";
-                } else {
-                    $errors[] = "Database error: " . $conn->error;
-                }
-                $stmt->close();
+    if ($title && $author && $category_id && $description) {
+        $sql = "INSERT INTO books (title, author, category_id, description) VALUES (?, ?, ?, ?)";
+        if ($stmt = $conn->prepare($sql)) {
+            $stmt->bind_param('ssis', $title, $author, $category_id, $description);
+            if ($stmt->execute()) {
+                $success = "Book added successfully.";
             } else {
-                $errors[] = "Database error: " . $conn->error;
+                $error = "Error: " . $conn->error;
             }
-        }
-    } elseif ($action == 'update') {
-        $book_id = intval($_POST['book_id']);
-        if (empty($title) || empty($author) || empty($category_id) || empty($description) || empty($book_id)) {
-            $errors[] = "All fields are required.";
+            $stmt->close();
         } else {
-            $sql = "UPDATE books SET title = ?, author = ?, category_id = ?, description = ? WHERE id = ?";
-            if ($stmt = $conn->prepare($sql)) {
-                $stmt->bind_param('ssisi', $title, $author, $category_id, $description, $book_id);
-
-                if ($stmt->execute()) {
-                    $success = "Book updated successfully.";
-                } else {
-                    $errors[] = "Database error: " . $conn->error;
-                }
-                $stmt->close();
-            } else {
-                $errors[] = "Database error: " . $conn->error;
-            }
+            $error = "Error: " . $conn->error;
         }
-    } elseif ($action == 'delete') {
-        $book_id = intval($_POST['book_id']);
-        if (empty($book_id)) {
-            $errors[] = "Book ID is required.";
+    } else {
+        $error = "All fields are required.";
+    }
+}
+
+// Delete book
+if (isset($_GET['delete_book_id'])) {
+    $book_id = intval($_GET['delete_book_id']);
+    
+    // First, delete any related records from book_requests
+    $sql = "DELETE FROM book_requests WHERE book_id = ?";
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param('i', $book_id);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    // Now delete the book
+    $sql = "DELETE FROM books WHERE id = ?";
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param('i', $book_id);
+        if ($stmt->execute()) {
+            $success = "Book deleted successfully.";
         } else {
-            $sql = "DELETE FROM books WHERE id = ?";
-            if ($stmt = $conn->prepare($sql)) {
-                $stmt->bind_param('i', $book_id);
-
-                if ($stmt->execute()) {
-                    $success = "Book deleted successfully.";
-                } else {
-                    $errors[] = "Database error: " . $conn->error;
-                }
-                $stmt->close();
-            } else {
-                $errors[] = "Database error: " . $conn->error;
-            }
+            $error = "Error: " . $conn->error;
         }
+        $stmt->close();
+    } else {
+        $error = "Error: " . $conn->error;
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Librarian Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 800px; margin: auto; padding: 20px; }
+        .navbar a { margin: 0 10px; text-decoration: none; color: #333; }
+        .navbar { background-color: #f1f1f1; padding: 10px; text-align: center; }
+        .footer { background-color: #333; color: white; text-align: center; padding: 20px; position: fixed; left: 0; bottom: 0; width: 100%; }
+    </style>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -201,41 +190,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     </style>
 </head>
-
 <body>
 <div class="navbar">
     <a href="index.php">Home</a>
-    <a href="student_login.php">Student</a>
+    
     <a href="books_library.php">Library</a>
-    <a href="books_library.php">Librarian</a>
-    <a href="books_library.php">Manager</a>
+    <a href="requests_librarian.php">Book Requests of Students</a>
+   
 
     <a href="about_us.php">About Us</a>
     <a href="contact_us.php">Contact Us</a>
 </div>
-
-    
+    <div class="container">
         <h2>Your Librarian Dashboard</h2>
-        <?php if (!empty($errors)): ?>
-            <div style="color: red;">
-                <?php foreach ($errors as $error): ?>
-                    <p><?php echo htmlspecialchars($error); ?></p>
-                <?php endforeach; ?>
-            </div>
+        <?php if (isset($success)): ?>
+            <p style="color:green;"><?php echo $success; ?></p>
+        <?php elseif (isset($error)): ?>
+            <p style="color:red;"><?php echo $error; ?></p>
         <?php endif; ?>
-        <?php if ($success): ?>
-            <div style="color: green;">
-                <p><?php echo htmlspecialchars($success); ?></p>
-            </div>
-        <?php endif; ?>
-
-        <h3>Add Book</h3>
         <form method="post" action="">
-            <input type="hidden" name="action" value="add">
-            Title: <input type="text" name="title" required><br>
-            Author: <input type="text" name="author" required><br>
-            Category:
-            <select name="category_id" required>
+            <input type="hidden" name="add_book" value="1">
+            <label for="title">Book Title</label>
+            <input type="text" id="title" name="title" required>
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author" required>
+            <label for="category_id">Category</label>
+            <select id="category_id" name="category_id" required>
                 <option value="1">Science</option>
                 <option value="2">Computer</option>
                 <option value="3">BA</option>
@@ -243,38 +223,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <option value="5">BCA</option>
                 <option value="6">BBA</option>
                 <option value="7">BEd</option>
-            </select><br>
-            Description: <textarea name="description" required></textarea><br>
+            </select>
+            <label for="description">Description</label>
+            <textarea id="description" name="description" required></textarea>
             <button type="submit">Add Book</button>
         </form>
-
-        <h3>Update Book</h3>
-        <form method="post" action="">
-            <input type="hidden" name="action" value="update">
-            Book ID: <input type="number" name="book_id" required><br>
-            Title: <input type="text" name="title" required><br>
-            Author: <input type="text" name="author" required><br>
-            Category:
-            <select name="category_id" required>
-                <option value="1">Science</option>
-                <option value="2">Computer</option>
-                <option value="3">BA</option>
-                <option value="4">BSc</option>
-                <option value="5">BCA</option>
-                <option value="6">BBA</option>
-                <option value="7">BEd</option>
-            </select><br>
-            Description: <textarea name="description" required></textarea><br>
-            <button type="submit">Update Book</button>
-        </form>
-
-        <h3>Delete Book</h3>
-        <form method="post" action="">
-            <input type="hidden" name="action" value="delete">
-            Book ID: <input type="number" name="book_id" required><br>
-            <button type="submit">Delete Book</button>
-        </form>
-        <a href="requests_librarian.php">Requests_librarian </a>
+        <h3>Existing Books</h3>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+            <?php
+            $sql = "SELECT books.id, books.title, books.author, categories.name AS category, books.description 
+                    FROM books 
+                    JOIN categories ON books.category_id = categories.id";
+            $result = $conn->query($sql);
+            while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($row['title']); ?></td>
+                    <td><?php echo htmlspecialchars($row['author']); ?></td>
+                    <td><?php echo htmlspecialchars($row['category']); ?></td>
+                    <td><?php echo htmlspecialchars($row['description']); ?></td>
+                    <td><a href="?delete_book_id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this book?');">Delete</a></td>
+                </tr>
+            <?php endwhile; ?>
+        </table>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Library Management System</p>
+    </div>
 </body>
-
 </html>

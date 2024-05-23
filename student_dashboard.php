@@ -1,5 +1,5 @@
 <?php
-include('config.php');
+include ('config.php');
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
@@ -8,6 +8,15 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 $user_name = $_SESSION['username']; // Retrieve the username from session
+
+
+// Fetch the latest notice
+// $sql = "SELECT notice, created_at FROM notices ORDER BY created_at DESC LIMIT 1";
+// $result = $conn->query($sql);
+// $latest_notice = $result->fetch_assoc();
+
+
+
 
 $sql_issued_books = "SELECT b.title, b.author, i.issued_at 
                      FROM issued_books i 
@@ -21,6 +30,7 @@ $issued_books = $stmt->get_result();
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Student Dashboard</title>
     <style>
@@ -41,11 +51,14 @@ $issued_books = $stmt->get_result();
             margin-bottom: 20px;
         }
 
-        table, th, td {
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
         }
 
-        th, td {
+        th,
+        td {
             padding: 12px;
             text-align: left;
         }
@@ -72,7 +85,13 @@ $issued_books = $stmt->get_result();
         }
 
         @media screen and (max-width: 600px) {
-            table, thead, tbody, th, td, tr {
+
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
                 display: block;
             }
 
@@ -104,6 +123,11 @@ $issued_books = $stmt->get_result();
 
     <style>
         /* Navbar */
+
+        .form-group{
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
         .navbar {
             background-color: #333;
             overflow: hidden;
@@ -137,35 +161,39 @@ $issued_books = $stmt->get_result();
         }
     </style>
 </head>
-<body>
-<div class="navbar">
-    <a href="index.php">Home</a>
-    <a href="student_login.php">Student</a>
-    <a href="books_library.php">Library</a>
-    <a href="ask_query.php">Ask Query</a>
-    <a href="books_library.php">Librarian</a>
-    <a href="books_library.php">Manager</a>
 
-    <!-- <a href="about_us.php">About Us</a> -->
-    <a href="contact_us.php">Contact Us</a>
-</div>
-<h2>Welcome, <?php echo htmlspecialchars($user_name); ?> !</h2>
-<p>This is your student dashboard. You can view and manage your books and queries here.</p>
-<h2>Your Issued Books</h2>
-<table border="1">
-    <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Issued At</th>
-    </tr>
-    <?php while($row = $issued_books->fetch_assoc()): ?>
-    <tr>
-        <td><?php echo htmlspecialchars($row['title']); ?></td>
-        <td><?php echo htmlspecialchars($row['author']); ?></td>
-        <td><?php echo htmlspecialchars($row['issued_at']); ?></td>
-    </tr>
-    <?php endwhile; ?>
-</table>
-<a href="books_library.php">Go to Library To See all Books</a>
+<body>
+    <div class="navbar">
+        <a href="index.php">Home</a>
+       
+        <a href="books_library.php">Library</a>
+        <a href="ask_query.php">Ask Query</a>
+        <a href="sir_notice.php">Sir's Message</a>
+        
+        <!-- <a href="about_us.php">About Us</a> -->
+        <a href="contact_us.php">Contact Us</a>
+    </div>
+    <h2>Welcome, <?php echo htmlspecialchars($user_name); ?> !</h2>
+    <p>This is your student dashboard. You can view and manage your books and queries here.</p>
+    <h2>Your Issued Books</h2>
+    <table border="1">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Issued At</th>
+        </tr>
+        <?php while ($row = $issued_books->fetch_assoc()): ?>
+            <tr>
+                <td><?php echo htmlspecialchars($row['title']); ?></td>
+                <td><?php echo htmlspecialchars($row['author']); ?></td>
+                <td><?php echo htmlspecialchars($row['issued_at']); ?></td>
+            </tr>
+        <?php endwhile; ?>
+    </table>
+    <div class="form-group">
+        <button type="submit"><a href="books_library.php">Go to Library To See all Books</a></button>
+    </div>
+    <!-- <a href="books_library.php">Go to Library To See all Books</a> -->
 </body>
+
 </html>

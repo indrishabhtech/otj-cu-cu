@@ -163,10 +163,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['book_id'])) {
 <body>
 <div class="navbar">
     <a href="index.php">Home</a>
-    <a href="student_login.php">Student</a>
-    <a href="books_library.php">Library</a>
-    <a href="books_library.php">Librarian</a>
-    <a href="books_library.php">Manager</a>
 
     <a href="about_us.php">About Us</a>
     <a href="contact_us.php">Contact Us</a>

@@ -53,12 +53,12 @@
 </div>
 
 <div style="padding: 20px">
-    <h2>Welcome to Our Library Management System</h2>
-    <p>This is a platform to manage books and users efficiently.</p>
+    <h2>Welcome to Our PMPTM Library</h2>
+    <p>Here You can find relevant books related to your course</p>
 </div>
 
 <div class="footer">
-    <p>&copy; 2024 Library Management System</p>
+    <p>&copy; 2024 Pmptm@Library</p>
 </div>
 
 </body>

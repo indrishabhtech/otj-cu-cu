@@ -1,4 +1,4 @@
-These warnig after - deletion on librarian_dashboard.php page
+I am getting These warnig after - deletion on librarian_dashboard.php page
 
 Warning: Undefined array key "title" in C:\xampp\htdocs\LMS\librarian_dashboard.php on line 15
 
@@ -8,7 +8,26 @@ Warning: Undefined array key "category_id" in C:\xampp\htdocs\LMS\librarian_dash
 
 Warning: Undefined array key "description" in C:\xampp\htdocs\LMS\librarian_dashboard.php on line 18
 
+I am getting after deletion on librarian_dashboard.php page  some time after deleting book this error occour - Database error: Cannot delete or update a parent row: a foreign key constraint fails (`library_manager`.`book_requests`, CONSTRAINT `book_requests_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`))
 
+
+-- on any page when after working on page when i click back to previous page then it asks every time to reload the page , i don't want to reload each & every time please fix it.
+
+-- ( done )don't replace the notice of sir on sir_notice page for student instead create a sequence of past notices and show the last Posted/ or you can say show the latest notice of sir and after that below latest notice all past notices should be shown.
+
+
+--- on librarian_dashboard.php file when librarian delete a book it gets deleted and a success message comes book deleted successfully but on the top of the page some Warnings comes - Warning: Undefined array key "title" in C:\xampp\htdocs\LMS\otj-cu-cu\librarian_dashboard.php on line 15
+
+Warning: Undefined array key "author" in C:\xampp\htdocs\LMS\otj-cu-cu\librarian_dashboard.php on line 16
+
+Warning: Undefined array key "category_id" in C:\xampp\htdocs\LMS\otj-cu-cu\librarian_dashboard.php on line 17
+
+Warning: Undefined array key "description" in C:\xampp\htdocs\LMS\otj-cu-cu\librarian_dashboard.php on line 18
+please solve it.
+
+--- update header footer & css of sir's message page and sir notice page 
+
+---- ( done) upload all files on server with database and working position
 
 ---   (  done)  to create a real time crud operation message service eith students for manager 
 

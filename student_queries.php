@@ -22,8 +22,72 @@ $result = $conn->query($sql);
         table, th, td { border: 1px solid black; }
         th, td { padding: 12px; text-align: left; }
     </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .navbar a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #f1f1f1;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+    <style>
+        /* Navbar */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
+<div class="navbar">
+    <a href="index.php">Home</a>
+
+    <a href="about_us.php">About Us</a>
+    <a href="contact_us.php">Contact Us</a>
+    <a href="logout.php">Logout</a>
+</div>
     <div class="container">
         <h2>Student Queries</h2>
         <table>

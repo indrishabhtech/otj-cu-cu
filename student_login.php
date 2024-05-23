@@ -94,17 +94,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     </style>
 <body>
-<div class="container">
 
-    <div class="navbar">
+<div  class="container" >
+<div class="navbar">
     <a href="index.php">Home</a>
-    <a href="student_login.php">Student</a>
-    <a href="books_library.php">Library</a>
-    <a href="login_librarian.php">Librarian</a>
-    <a href="login_pmpt.php.php">Manager</a>
-
+    <!-- <a href="student_login.php">Student</a> -->
+    <!-- <a href="books_library.php">Library</a> -->
+    <!-- <a href="login_librarian.php">Librarian</a> -->
+    <!-- <a href="login_pmpt.php.php">Manager</a> -->
     <a href="about_us.php">About Us</a>
     <a href="contact_us.php">Contact Us</a>
+    <a href="logout.php">Logout</a>
 </div>
     <?php if (!empty($errors)): ?>
         <div style="color: red;">

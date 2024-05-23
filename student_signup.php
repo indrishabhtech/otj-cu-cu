@@ -98,9 +98,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="navbar">
     <a href="index.php">Home</a>
     <a href="student_login.php">Student</a>
-    <a href="books_library.php">Library</a>
+    <!-- <a href="books_library.php">Library</a>
     <a href="books_library.php">Librarian</a>
-    <a href="books_library.php">Manager</a>
+    <a href="books_library.php">Manager</a> -->
 
     <a href="about_us.php">About Us</a>
     <a href="contact_us.php">Contact Us</a>
@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php endif; ?>
         <form class="signup-form" method="post">
         <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
-            <h2>Signup</h2>
+            <h2 style="padding: 10px" >Register</h2>
             
             <div class="form-group">
                 <label for="username">Username</label>

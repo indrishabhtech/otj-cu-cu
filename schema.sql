@@ -169,3 +169,17 @@ CREATE TABLE student_queries (
     issue TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+-- Update the Database Schema
+-- Add a table to store notices:
+CREATE TABLE notices (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    notice TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Updating the Database
+-- Ensure the necessary foreign key constraints are set to cascade deletions if necessary. Here’s how you can adjust the schema:
+
+ALTER TABLE book_requests ADD CONSTRAINT book_requests_ibfk_2 FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE;
