@@ -90,7 +90,6 @@ function is_admin($user_id, $conn) {
     </form>
 
     <h3>Update or Delete Books</h3>
-    <!-- Form and code to update or delete books -->
-    <!-- Here to implement the simple crud form  -->
+ 
 </body>
 </html>

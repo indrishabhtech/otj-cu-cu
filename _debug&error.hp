@@ -1,29 +1,28 @@
-I am getting These warnig after - deletion on librarian_dashboard.php page
+---Every time when i do some work on a page and then press back to go previous page then it ask every time Confirm Form Resubmission and shows me this  - Confirm Form Resubmission This webpage requires data that you entered earlier in order to be properly displayed. You can send this data again, but by doing so you will repeat any action this page previously performed.
+Press the reload button to resubmit the data needed to load the page.
+ERR_CACHE_MISS (Solution - You can redirect on the pages on you are going)
 
-Warning: Undefined array key "title" in C:\xampp\htdocs\LMS\librarian_dashboard.php on line 15
+----( Rishabh sir's demand) -- add barcode reader on books for approval by librarian to students
 
-Warning: Undefined array key "author" in C:\xampp\htdocs\LMS\librarian_dashboard.php on line 16
 
-Warning: Undefined array key "category_id" in C:\xampp\htdocs\LMS\librarian_dashboard.php on line 17
+--- add a return book button on student_dashboard.php page your issued books section by which student can return their issued book to the database on librarian approval and student can request new book from librarian which come into their accout if the librarian approves
 
-Warning: Undefined array key "description" in C:\xampp\htdocs\LMS\librarian_dashboard.php on line 18
 
-I am getting after deletion on librarian_dashboard.php page  some time after deleting book this error occour - Database error: Cannot delete or update a parent row: a foreign key constraint fails (`library_manager`.`book_requests`, CONSTRAINT `book_requests_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`))
+---- add filter to search things on books_library.php page for students.
+
+
+---- Add filter + sorting for manager on their respective dashboard to see students query through sorting & searching. Ex- see students of bca , b.ed etc.
+
+
+--- add return time for books and penality for late 
+
+---- add some chart , bar and graph statical data on manager dashboard page for different things like , how many students visit last day/week/month/year .. how much book we have in library .. etc.
 
 
 -- on any page when after working on page when i click back to previous page then it asks every time to reload the page , i don't want to reload each & every time please fix it.
 
 -- ( done )don't replace the notice of sir on sir_notice page for student instead create a sequence of past notices and show the last Posted/ or you can say show the latest notice of sir and after that below latest notice all past notices should be shown.
 
-
---- on librarian_dashboard.php file when librarian delete a book it gets deleted and a success message comes book deleted successfully but on the top of the page some Warnings comes - Warning: Undefined array key "title" in C:\xampp\htdocs\LMS\otj-cu-cu\librarian_dashboard.php on line 15
-
-Warning: Undefined array key "author" in C:\xampp\htdocs\LMS\otj-cu-cu\librarian_dashboard.php on line 16
-
-Warning: Undefined array key "category_id" in C:\xampp\htdocs\LMS\otj-cu-cu\librarian_dashboard.php on line 17
-
-Warning: Undefined array key "description" in C:\xampp\htdocs\LMS\otj-cu-cu\librarian_dashboard.php on line 18
-please solve it.
 
 --- update header footer & css of sir's message page and sir notice page 
 
@@ -48,7 +47,7 @@ Notice board for manager to give some message to students on their notice board 
 
  ------------------------Every page loop creation 
 
-----  (  This feature has been added  )   ----Add good css style on each page 
+----  (  done  )   ----Add good css style on each page 
 
  ------- Error handling like if there is no books to delete then display message to the librarian
 
@@ -56,7 +55,7 @@ Notice board for manager to give some message to students on their notice board 
 
 
 
- ---------- ( This feature has been added ) Add a feature a issue a book to the student by the librarian approval on student request for a book----
+ ---------- ( done ) Add a feature a issue a book to the student by the librarian approval on student request for a book----
 
 
   

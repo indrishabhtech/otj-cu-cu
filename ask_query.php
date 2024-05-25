@@ -29,54 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Student Dashboard</title>
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-    .container {
-        max-width: 800px;
-        margin: auto;
-        padding: 20px;
-    }
-    .navbar a {
-        margin: 0 10px;
-        text-decoration: none;
-        color: #333;
-    }
-    .navbar {
-        background-color: #f1f1f1;
-        padding: 10px;
-        text-align: center;
-    }
-    .footer {
-        background-color: #333;
-        color: white;
-        text-align: center;
-        padding: 20px;
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-    }
-    input[type=text], input[type=password], textarea, button {
-        width: 100%;
-        padding: 12px;
-        margin: 8px 0;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-    table, th, td {
-        border: 1px solid black;
-    }
-    th, td {
-        padding: 12px;
-        text-align: left;
-    }
-</style>
-
+    <link rel="stylesheet" href="ask_query.css">
     <style>
         body { font-family: Arial, sans-serif; }
         .container { max-width: 800px; margin: auto; padding: 20px; }

@@ -15,61 +15,77 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['request_id'])) {
     $action = $_POST['action'];
 
     if ($action == 'accept') {
-        // Get the user_id and book_id from the request
-        $sql = "SELECT user_id, book_id FROM book_requests WHERE id = ?";
+        // Get the issue_id from the return request
+        $sql = "SELECT issue_id FROM return_requests WHERE id = ?";
         if ($stmt = $conn->prepare($sql)) {
             $stmt->bind_param('i', $request_id);
             $stmt->execute();
-            $stmt->bind_result($user_id, $book_id);
+            $stmt->bind_result($issue_id);
             $stmt->fetch();
             $stmt->close();
+        } else {
+            $errors[] = "Error preparing statement: " . $conn->error;
         }
 
-        // Insert into issued_books
-        $sql_issue = "INSERT INTO issued_books (user_id, book_id, issued_at) VALUES (?, ?, NOW())";
-        if ($stmt = $conn->prepare($sql_issue)) {
-            $stmt->bind_param('ii', $user_id, $book_id);
+        // Delete the issued book entry
+        $sql_delete_issue = "DELETE FROM issued_books WHERE id = ?";
+        if ($stmt = $conn->prepare($sql_delete_issue)) {
+            $stmt->bind_param('i', $issue_id);
             $stmt->execute();
             $stmt->close();
+        } else {
+            $errors[] = "Error preparing statement: " . $conn->error;
         }
 
-        // Delete the request after approval
-        $sql_delete = "DELETE FROM book_requests WHERE id = ?";
-        if ($stmt = $conn->prepare($sql_delete)) {
+        // Delete the return request after approval
+        $sql_delete_request = "DELETE FROM return_requests WHERE id = ?";
+        if ($stmt = $conn->prepare($sql_delete_request)) {
             $stmt->bind_param('i', $request_id);
             $stmt->execute();
             $stmt->close();
+        } else {
+            $errors[] = "Error preparing statement: " . $conn->error;
         }
 
-        $success = "Book request accepted and issued.";
+        if (empty($errors)) {
+            $success = "Return request accepted and book returned.";
+        }
     } elseif ($action == 'reject') {
-        $sql_delete = "DELETE FROM book_requests WHERE id = ?";
-        if ($stmt = $conn->prepare($sql_delete)) {
+        $sql_delete_request = "DELETE FROM return_requests WHERE id = ?";
+        if ($stmt = $conn->prepare($sql_delete_request)) {
             $stmt->bind_param('i', $request_id);
             $stmt->execute();
             $stmt->close();
+        } else {
+            $errors[] = "Error preparing statement: " . $conn->error;
         }
 
-        $success = "Book request rejected.";
+        if (empty($errors)) {
+            $success = "Return request rejected.";
+        }
     }
 }
 
-// Fetch all pending book requests
-$sql_requests = "SELECT r.id, u.username, b.title, b.author FROM book_requests r
+// Fetch all pending return requests
+$sql_requests = "SELECT r.id, u.username, b.title, b.author FROM return_requests r
                  JOIN users u ON r.user_id = u.id
-                 JOIN books b ON r.book_id = b.id";
+                 JOIN issued_books i ON r.issue_id = i.id
+                 JOIN books b ON i.book_id = b.id";
 $result_requests = $conn->query($sql_requests);
+
+if ($result_requests === false) {
+    die("Error executing query: " . $conn->error);
+}
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Book Requests</title>
-<link rel="stylesheet" href="requests_librarian.css">
-
+    <title>Return Requests</title>
+    <link rel="stylesheet" href="return_books_librarian.css">
 </head>
 <body>
-    <h2>Book Requests</h2>
+    <h2>Return Requests</h2>
     <?php if (!empty($errors)): ?>
         <div style="color: red;">
             <?php foreach ($errors as $error): ?>
@@ -77,7 +93,7 @@ $result_requests = $conn->query($sql_requests);
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
-    <?php if ($success): ?>
+    <?php if (!empty($success)): ?>
         <div style="color: green;">
             <p><?php echo htmlspecialchars($success); ?></p>
         </div>
