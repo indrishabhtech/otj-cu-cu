@@ -17,13 +17,13 @@ function sendMail($email, $verification_code) {
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'shyamjimishra4017@gmail.com'; // Replace with your email address
-        $mail->Password   = 'lbjvlwjzeimufwko'; // Replace with your app password
+        $mail->Username   = ''; // Replace with your email address
+        $mail->Password   = ''; // Replace with your app password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
 
         //Recipients
-        $mail->setFrom('shyamjimishra4017@gmail.com', 'PMPTM Library'); // Replace with your email address
+        $mail->setFrom('', 'PMPTM Library'); // Replace with your email address
         $mail->addAddress($email);
 
         //Content
