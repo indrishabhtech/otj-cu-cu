@@ -27,12 +27,12 @@ function sendMail($email, $verification_code) {
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'shyamjimishra4017@gmail.com';
-        $mail->Password   = 'lbjvlwjzeimufwko';
+        $mail->Username   = '';
+        $mail->Password   = '';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
 
-        $mail->setFrom('shyamjimishra4017@gmail.com', 'PMPTM Library');
+        $mail->setFrom('', 'PMPTM Library');
         $mail->addAddress($email);
 
         $mail->isHTML(true);
