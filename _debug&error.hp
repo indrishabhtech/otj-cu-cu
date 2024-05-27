@@ -4,6 +4,8 @@ ERR_CACHE_MISS (Solution - You can redirect on the pages on you are going)
 
 ----( Rishabh sir's demand) -- add barcode reader on books for approval by librarian to students
 
+--(done )Add smtp email verification on each login & registration page
+
 
 --- add a return book button on student_dashboard.php page your issued books section by which student can return their issued book to the database on librarian approval and student can request new book from librarian which come into their accout if the librarian approves
 

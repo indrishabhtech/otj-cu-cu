@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Management System</title>
-    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="css/navbar.css">
 </head>
 <body>
 
@@ -21,6 +21,7 @@
 
 <div style="padding: 20px">
     <h2>Welcome to Our PMPTM Library</h2>
+ 
     <p>Here You can find relevant books related to your course</p>
 </div>
 

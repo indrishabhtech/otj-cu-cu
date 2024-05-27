@@ -82,9 +82,16 @@ if ($result_requests === false) {
 <html>
 <head>
     <title>Return Requests</title>
-    <link rel="stylesheet" href="return_books_librarian.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/return_books_librarian.css">
 </head>
 <body>
+<div class="navbar">
+    <a href="index.php">Home</a>
+    <a href="librarian_dashboard.php">Dashboard</a>
+    <a href="about_us.php">About Us</a>
+    <a href="contact_us.php">Contact Us</a>
+</div>
     <h2>Return Requests</h2>
     <?php if (!empty($errors)): ?>
         <div style="color: red;">

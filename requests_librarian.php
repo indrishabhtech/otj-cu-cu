@@ -65,10 +65,16 @@ $result_requests = $conn->query($sql_requests);
 <html>
 <head>
     <title>Book Requests</title>
-<link rel="stylesheet" href="requests_librarian.css">
-
+<link rel="stylesheet" href="css/requests_librarian.css">
+<link rel="stylesheet" href="css/navbar.css">
 </head>
 <body>
+<div class="navbar">
+    <a href="index.php">Home</a>
+    <a href="librarian_dashboard.php">Dashboard</a>
+    <a href="about_us.php">About Us</a>
+    <a href="contact_us.php">Contact Us</a>
+</div>
     <h2>Book Requests</h2>
     <?php if (!empty($errors)): ?>
         <div style="color: red;">

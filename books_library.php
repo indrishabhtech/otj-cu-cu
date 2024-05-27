@@ -3,7 +3,8 @@ include ('config.php');
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    echo "Please login to see the library";
+    header("Location: index.php");
     exit;
 }
 
@@ -31,9 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['book_id'])) {
 
 <head>
     <title>All Books in Library</title>
-  <link rel="stylesheet" href="books_library.css">
+  <link rel="stylesheet" href="css/books_library.css">
 
-<link rel="stylesheet" href="navbar.css">
+<link rel="stylesheet" href="css/navbar.css">
 
 </head>
 

@@ -32,6 +32,7 @@ if ($result) {
         .notice { margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; }
         .notice h3 { margin-top: 0; }
     </style>
+    <link rel="stylesheet" href="navbar.css">
 </head>
 <body>
     <div class="navbar">

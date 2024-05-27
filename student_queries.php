@@ -22,14 +22,14 @@ $result = $conn->query($sql);
         table, th, td { border: 1px solid black; }
         th, td { padding: 12px; text-align: left; }
     </style>
-  <link rel="stylesheet" href="navbar2.css">
+  <link rel="stylesheet" href="css/navbar2.css">
     
 </head>
 <body>
 <div class="navbar">
-    <a href="index.php">Home</a>
+    <a href="dashboard_pmpt.php">Dashboard</a>
 
-    <a href="about_us.php">About Us</a>
+    <a href="notice_board.php">Notice Board</a>
     <a href="contact_us.php">Contact Us</a>
     <a href="logout.php">Logout</a>
 </div>

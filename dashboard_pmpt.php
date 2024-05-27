@@ -1,5 +1,5 @@
 <?php
-include ('config.php');
+include('config.php');
 session_start();
 
 if (!isset($_SESSION['manager_id'])) {
@@ -38,26 +38,22 @@ $manager_username = $_SESSION['manager_username'];
             text-align: center;
         }
     </style>
-  <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="css/navbar.css">
 </head>
+<body>
 <div class="navbar">
     <a href="index.php">Home</a>
     <a href="notice_board.php">Notice Messages For Students</a>
     <a href="student_queries.php">Student Queries</a>
     <a href="contact_us.php">Contact Us</a>
-    <a href="logout.php">Logout</a>
+    <a href="pmpt_logout.php">Logout</a>
 </div>
 
-<body>
-    <div class="navbar">
-        <!-- <a href="message.php">Notice Messages For Students</a>
-        <a href="student_queries.php">Student Queries</a>
-        <a href="logout.php">Logout</a> -->
-    </div>
-    <div class="container">
-        <h2>Welcome, <?php echo htmlspecialchars($manager_username); ?>!</h2>
-        <p>This is your dashboard. From here, you can manage student queries.</p>
-    </div>
+<div class="container">
+    <h2>Welcome, <?php echo htmlspecialchars($manager_username); ?>!</h2>
+    <p>This is your dashboard. From here, you can manage student queries.</p><br>
+    Want to post a notice for student <a href="notice_board.php">click here </a>to post a new notice
+</div>
 </body>
 
 </html>

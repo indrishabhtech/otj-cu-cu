@@ -64,8 +64,8 @@ if (isset($_GET['delete_book_id'])) {
 <html>
 <head>
     <title>Librarian Dashboard</title>
-   <link rel="stylesheet" href="librarian_dashboard.css">
-<link rel="stylesheet" href="navbar.css">
+   <link rel="stylesheet" href="css/librarian_dashboard.css">
+<link rel="stylesheet" href="css/navbar.css">
 </head>
 <body>
 <div class="navbar">

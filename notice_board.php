@@ -33,14 +33,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Notice Board</title>
-  <link rel="stylesheet" href="navbar3.css">
+  <link rel="stylesheet" href="css/navbar3.css">
 </head>
 <body>
     <div class="navbar">
-        <a href="dashboard.php">Dashboard</a>
+        <a href="dashboard_pmpt.php">Dashboard</a>
         <a href="student_queries.php">Student Queries</a>
         <a href="notice_board.php">Notice Board</a>
-        <a href="logout.php">Logout</a>
+        <a href="pmpt_logout.php">Logout</a>
     </div>
     <div class="container">
         <h2>Post a Notice</h2>
